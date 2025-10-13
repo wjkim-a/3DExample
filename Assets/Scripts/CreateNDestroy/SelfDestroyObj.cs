@@ -9,6 +9,7 @@ public class SelfDestroyObj : MonoBehaviour
 
     void Update()
     {
+        _aliveTime += Time.deltaTime;
         CheckSelfDestroy();
     }
 
