@@ -6,7 +6,7 @@ public class ObjectMaker : MonoBehaviour
 {
     [SerializeField] private int _makeObjCount;
     [SerializeField] private GameObject _obj;
-    [SerializeField] private Transform _objParents;
+    [SerializeField] private Transform _objParents;    
 
     void Update()
     {
@@ -21,7 +21,8 @@ public class ObjectMaker : MonoBehaviour
 
         for (int i = 0; i < _makeObjCount; i++)
         {
-            Instantiate(_obj, _objParents);
+            GameObject obj = Instantiate(_obj, _objParents);
+            obj.transform.position = new Vector3(Random.Range(0, 20), 0, Random.Range(0, 20));
         }
     }
 }
