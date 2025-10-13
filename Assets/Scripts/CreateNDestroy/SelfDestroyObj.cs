@@ -7,7 +7,6 @@ public class SelfDestroyObj : MonoBehaviour
     [SerializeField] private float _destroyDelay;
     private float _aliveTime = 0f;
 
-    // Update is called once per frame
     void Update()
     {
         CheckSelfDestroy();
