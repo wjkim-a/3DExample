@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class InputComponent : MonoBehaviour
 {
     private float _horInput;
     private float _verInput;
+    
+    public Action OnClickFireAction;
 
     public float HorInput => _horInput;
     public float VerInput => _verInput;
@@ -15,7 +18,7 @@ public class InputComponent : MonoBehaviour
         _horInput = Input.GetAxisRaw("Horizontal");
         _verInput = Input.GetAxisRaw("Vertical");
 
-        Debug.Log($"HorInput = {_horInput}");
-        Debug.Log($"VerInput = {_verInput}");
+        if(Input.GetAxisRaw("Fire1") > 0)
+            OnClickFireAction?.Invoke();
     }
 }
