@@ -6,7 +6,7 @@ public class BulletBase : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("BulletChecker"))
+        if(other.CompareTag("BulletChecker") || other.CompareTag("Enemy"))
         {
             Destroy(gameObject);
         }

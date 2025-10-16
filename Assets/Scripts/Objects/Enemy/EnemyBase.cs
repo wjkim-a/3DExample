@@ -10,7 +10,7 @@ public class EnemyBase : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("EnemyChecker"))
+        if (other.CompareTag("EnemyChecker") || other.CompareTag("Player"))
         {
             Destroy(gameObject);
             return;
