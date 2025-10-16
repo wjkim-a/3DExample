@@ -18,7 +18,7 @@ public class InputComponent : MonoBehaviour
         _horInput = Input.GetAxisRaw("Horizontal");
         _verInput = Input.GetAxisRaw("Vertical");
 
-        if(Input.GetAxisRaw("Fire1") > 0)
+        if(Input.GetAxisRaw("fire1") > 0)
             OnClickFireAction?.Invoke();
     }
 }
