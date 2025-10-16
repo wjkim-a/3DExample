@@ -8,8 +8,11 @@ public class MoverSpawner : MonoBehaviour
     [SerializeField] private Transform _waypointBox;
     [SerializeField] private float _spawnDelay;
 
+    private WaitForSeconds _delay;
+
     private void Start()
     {
+        _delay = new WaitForSeconds(_spawnDelay);
         StartCoroutine(SpawnMover());
     }
 
@@ -21,7 +24,7 @@ public class MoverSpawner : MonoBehaviour
             WaypointMover newMover = newMoverObj.GetComponent<WaypointMover>();
             newMover.SetWaypointBox(_waypointBox);
 
-            yield return new WaitForSeconds(_spawnDelay);
+            yield return _delay;
         }
     }
 }
