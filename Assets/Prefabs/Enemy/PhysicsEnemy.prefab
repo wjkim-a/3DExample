@@ -117,7 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1206414854048165166}
   - component: {fileID: 7034864357846690574}
-  - component: {fileID: 1442171332896186972}
+  - component: {fileID: 8526683107133067738}
   - component: {fileID: 4094794337346363653}
   - component: {fileID: -7934812478941118792}
   m_Layer: 0
@@ -158,7 +158,7 @@ MonoBehaviour:
   _maxHp: 50
   _moveSpeed: 10
   _damage: 10
---- !u!114 &1442171332896186972
+--- !u!114 &8526683107133067738
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffff2d5340873634eb71e577737300e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defense: 5
+  _defense: 10
 --- !u!135 &4094794337346363653
 SphereCollider:
   m_ObjectHideFlags: 0

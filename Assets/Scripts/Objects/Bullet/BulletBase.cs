@@ -4,6 +4,14 @@ public class BulletBase : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed;
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("BulletChecker"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Update()
     {
         MoveForward();

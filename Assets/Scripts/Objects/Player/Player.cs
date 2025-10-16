@@ -11,10 +11,12 @@ public class Player : MonoBehaviour
     private float _fireCoolTime;
     private InputComponent _inputCompnent;
 
+
     private void Start()
-    {        
+    {
         SetComponent();
     }
+
 
     private void SetComponent()
     {
