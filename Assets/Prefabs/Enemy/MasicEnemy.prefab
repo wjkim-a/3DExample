@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8258788918258503526}
   - component: {fileID: 2568449881344835375}
-  - component: {fileID: 725786487088049389}
+  - component: {fileID: 1734284153562342587}
   - component: {fileID: 7217948885486897192}
   - component: {fileID: 689085648078893999}
   m_Layer: 0
@@ -48,10 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f335870e1809504987aeb14a56eab38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 50
+  _damage: 1
   _moveSpeed: 10
-  _damage: 10
---- !u!114 &725786487088049389
+  _maxHp: 5
+--- !u!114 &1734284153562342587
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,10 +60,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 18045104289843388}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c75a88bc36e3c0a43a2bc7e53e3da338, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fca6fe2e0c3c1b45823c7be17d64052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weakness: 10
+  _weakness: 1
 --- !u!135 &7217948885486897192
 SphereCollider:
   m_ObjectHideFlags: 0

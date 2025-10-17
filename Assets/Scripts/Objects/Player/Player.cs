@@ -9,10 +9,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float _fireDelay;
     [SerializeField] private List<WeaponBase> _weapons;
 
+    private float _curHp;
     private float _fireCoolTime;
     private InputComponent _inputCompnent;
 
-    private float _curHp;
 
     private void Start()
     {
@@ -42,17 +42,22 @@ public class Player : MonoBehaviour
             return;
         }
 
-        foreach (WeaponBase weapon in _weapons)
+        foreach(WeaponBase weapon in _weapons) 
             weapon.Fire();
 
         _fireCoolTime = _fireDelay;
     }
 
+    //공격 받을 경우 호출할 함수
     public void OnTakeDamage(float damage)
     {
         _curHp -= damage;
+
+        Debug.Log($"playerHp = {_curHp}");
+
         if (_curHp <= 0)
         {
+            _curHp = 0;
             gameObject.SetActive(false);
         }
     }

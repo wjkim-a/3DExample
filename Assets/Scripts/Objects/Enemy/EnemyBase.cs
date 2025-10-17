@@ -2,14 +2,20 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
-    [SerializeField] protected float _maxHp;
-    [SerializeField] protected float _moveSpeed;
     [SerializeField] protected float _damage;
+    [SerializeField] protected float _moveSpeed;
+    [SerializeField] protected float _maxHp;
+
     protected float _curHp;
 
-    private void OnEnable()
+    private void Start()
     {
         InitEnemy();
+    }
+
+    private void InitEnemy()
+    {
+        _curHp = _maxHp;
     }
 
     private void Update()
@@ -18,11 +24,15 @@ public class EnemyBase : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        ITakeDamageAdapter adapter = other.GetComponent<ITakeDamageAdapter>();
-
-        if (adapter != null)
+        if(other.CompareTag("Player"))
         {
-            SendDamage(adapter);
+            Player player = other.GetComponent<Player>();
+
+            if(player == null)
+                return;
+
+            player.OnTakeDamage(_damage);
+
             Destroy(gameObject);
             return;
         }
@@ -34,34 +44,8 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-    protected virtual void SendDamage(ITakeDamageAdapter adapter)
-    {
-        adapter?.OnTakeDamage(_damage);
-    }
-
-    protected void InitEnemy()
-    {
-        _curHp = _maxHp;
-    }
-
     private void MoveDown()
     {
         transform.Translate(Vector3.forward * -1 * _moveSpeed * Time.deltaTime);
-    }
-
-    protected virtual void OnTakeDamage(float damage)
-    {
-        _curHp -= damage;
-
-        if (_curHp < 0)
-        {
-            _curHp = 0;
-            Die();
-        }
-    }
-
-    protected virtual void Die()
-    {
-        gameObject.SetActive(false);
     }
 }

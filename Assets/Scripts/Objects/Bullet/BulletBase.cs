@@ -7,16 +7,23 @@ public class BulletBase : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        ITakeDamageAdapter adapter = other.GetComponent<ITakeDamageAdapter>();
-
-        if(adapter != null )
+        if(other.CompareTag("Enemy"))
         {
+            ITakeDamageAdapter adapter = other.GetComponent<ITakeDamageAdapter>();
+
+            if (adapter == null)
+                return;
+
             adapter.OnTakeDamage(_damage);
+
+            Destroy(gameObject);
+            return;
         }
 
-        if(other.CompareTag("BulletChecker") || other.CompareTag("Enemy"))
+        if(other.CompareTag("BulletChecker"))
         {
             Destroy(gameObject);
+            return;
         }
     }
 
