@@ -37,7 +37,7 @@ public class BlockExample : MonoBehaviour
         for (int j = 0; j < _loopCount; j++)
         {
             Debug.Log("코루틴 진행중");
-            yield return null;
+            yield return new WaitForSeconds(_delayTime);
         }
 
         Debug.Log("코루틴 종료");

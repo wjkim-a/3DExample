@@ -2,7 +2,21 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
+    [SerializeField] protected float _damage;
     [SerializeField] protected float _moveSpeed;
+    [SerializeField] protected float _maxHp;
+
+    protected float _curHp;
+
+    private void Start()
+    {
+        InitEnemy();
+    }
+
+    private void InitEnemy()
+    {
+        _curHp = _maxHp;
+    }
 
     private void Update()
     {
@@ -10,7 +24,20 @@ public class EnemyBase : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("EnemyChecker") || other.CompareTag("Player"))
+        if(other.CompareTag("Player"))
+        {
+            Player player = other.GetComponent<Player>();
+
+            if(player == null)
+                return;
+
+            player.OnTakeDamage(_damage);
+
+            Destroy(gameObject);
+            return;
+        }
+
+        if (other.CompareTag("EnemyChecker"))
         {
             Destroy(gameObject);
             return;

@@ -5,18 +5,25 @@ using UnityEngine;
 [RequireComponent(typeof(MoveComponent))]
 public class Player : MonoBehaviour
 {
+    [SerializeField] private float _maxHp;
     [SerializeField] private float _fireDelay;
     [SerializeField] private List<WeaponBase> _weapons;
 
+    private float _curHp;
     private float _fireCoolTime;
     private InputComponent _inputCompnent;
 
 
     private void Start()
     {
+        InitPlayer();
         SetComponent();
     }
 
+    private void InitPlayer()
+    {
+        _curHp = _maxHp;
+    }
 
     private void SetComponent()
     {
@@ -39,6 +46,20 @@ public class Player : MonoBehaviour
             weapon.Fire();
 
         _fireCoolTime = _fireDelay;
+    }
+
+    //공격 받을 경우 호출할 함수
+    public void OnTakeDamage(float damage)
+    {
+        _curHp -= damage;
+
+        Debug.Log($"playerHp = {_curHp}");
+
+        if (_curHp <= 0)
+        {
+            _curHp = 0;
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnDestroy()
