@@ -1,10 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(MoveComponent))]
 public class Player : MonoBehaviour
 {
+    [SerializeField] private Transform _trfStartPos;
     [SerializeField] private float _maxHp;
     [SerializeField] private float _fireDelay;
     [SerializeField] private List<WeaponBase> _weapons;
@@ -13,6 +15,10 @@ public class Player : MonoBehaviour
     private float _fireCoolTime;
     private InputComponent _inputCompnent;
 
+    private void Awake()
+    {
+        RegistPlayer();
+    }
 
     private void Start()
     {
@@ -20,9 +26,16 @@ public class Player : MonoBehaviour
         SetComponent();
     }
 
+    private void RegistPlayer()
+    {
+        GameManager.Instance.OnGameStartAction += InitPlayer;
+    }
+
     private void InitPlayer()
     {
         _curHp = _maxHp;
+        transform.position = _trfStartPos.position;
+        gameObject.SetActive(true);
     }
 
     private void SetComponent()
@@ -58,6 +71,7 @@ public class Player : MonoBehaviour
         if (_curHp <= 0)
         {
             _curHp = 0;
+            GameManager.Instance.ChangeGameState();
             gameObject.SetActive(false);
         }
     }

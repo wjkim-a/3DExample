@@ -16,9 +16,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform _trfSpawonPosRight;
 
     private Coroutine _spawnEnemyCorutine;
+    private WaitForSeconds _delay;
 
     private void Start()
     {
+        _delay = new WaitForSeconds(_spawnDelay);
         StartGameAction();
     }
 
@@ -39,10 +41,13 @@ public class EnemySpawner : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(_spawnDelay);
+            yield return _delay;
 
-            int rand = Random.Range(0, 2);
-            CreateEnemy((eEnemyType)rand);
+            if (GameManager.Instance.IsPlaying)
+            {
+                int rand = Random.Range(0, 2);
+                CreateEnemy((eEnemyType)rand);
+            }
         }
     }
 
