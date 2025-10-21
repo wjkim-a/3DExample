@@ -17,6 +17,17 @@ public class EnemyBase : MonoBehaviour
     private void InitEnemy()
     {
         _curHp = _maxHp;
+        GameManager.Instance.OnGameEndAction.AddListener(DestroySelf);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnGameEndAction.RemoveListener(DestroySelf);
+    }
+
+    private void DestroySelf()
+    {
+        Destroy(gameObject);
     }
 
     private void Update()

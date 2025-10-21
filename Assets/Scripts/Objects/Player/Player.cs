@@ -15,6 +15,10 @@ public class Player : MonoBehaviour
     private float _fireCoolTime;
     private InputComponent _inputCompnent;
 
+    private List<IPlayerHpObserver> _hpObservers = new List<IPlayerHpObserver>();
+    public void AddHPObserver(IPlayerHpObserver Observer) => _hpObservers.Add(Observer);
+    public void RemoveHPObserver(IPlayerHpObserver Observer) => _hpObservers.Remove(Observer);
+
     private void Awake()
     {
         RegistPlayer();
@@ -36,6 +40,8 @@ public class Player : MonoBehaviour
         _curHp = _maxHp;
         transform.position = _trfStartPos.position;
         gameObject.SetActive(true);
+
+        NotifyHpUpdate();
     }
 
     private void SetComponent()
@@ -68,11 +74,21 @@ public class Player : MonoBehaviour
 
         Debug.Log($"playerHp = {_curHp}");
 
+        NotifyHpUpdate();
+
         if (_curHp <= 0)
         {
             _curHp = 0;
             GameManager.Instance.ChangeGameState();
             gameObject.SetActive(false);
+        }
+    }
+
+    private void NotifyHpUpdate()
+    {
+        foreach(IPlayerHpObserver observer in _hpObservers)
+        {
+            observer.OnPlayerHpChanged(_curHp, _maxHp);
         }
     }
 
